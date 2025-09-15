@@ -20,6 +20,53 @@ body {
   padding: 12px;
 }
 
+/* 説明画面全体を中央配置 */
+#intro-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85); /* 背景暗く */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  flex-direction: column;
+}
+
+.intro-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+#intro-image {
+  max-width: 90%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+#intro-next-btn {
+  position: relative;
+  bottom: 0;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffffcc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+#intro-next-btn:hover {
+  background-color: #fff;
+}
+
+
+
 /* マップ：画像の実サイズ比で拡縮。幅いっぱい、縦は画像に従う（切れない・歪まない） */
 #map-wrap {
   position: relative;

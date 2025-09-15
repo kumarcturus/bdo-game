@@ -14,10 +14,20 @@ const quizData = {
 // ----------------------------
 // 画面切り替え
 // ----------------------------
+
+// スタートボタンを押したら → 説明画面へ
 document.getElementById("start-btn").onclick = () => {
   document.getElementById("start-screen").style.display = "none";
-  document.getElementById("map-screen").style.display = "block";
+  document.getElementById("intro-screen").style.display = "flex"; // ここで説明画面を表示
 };
+
+// 進むボタンを押したら → マップ画面へ
+document.getElementById("intro-next-btn").onclick = () => {
+  document.getElementById("intro-screen").style.display = "none";
+  document.getElementById("map-screen").style.display = "block"; // ここでマップを表示
+};
+
+
 
 // ----------------------------
 // ポップアップ表示系
