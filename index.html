@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Bloom Days Online</title><!-- もとは金沢ファンタジーマップ -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- スタート画面 -->
+  <div id="start-screen">
+    <h1>Bllom Days Online</h1>
+    <button id="start-btn">スタート</button>
+  </div>
+
+  <!-- マップ画面 -->
+<!-- ここは map-screen 内の中身だけ置き換えればOK -->
+<div id="map-screen" style="display:none;">
+  <div class="page">
+    <!-- マップ -->
+    <div id="map-wrap">
+      <!-- 画像は <img> で表示：上辺は画面上辺と揃い、縦横比を保ったまま縮小 -->
+      <img id="map-img" src="map.jpg" alt="ファンタジー金沢マップ" loading="eager" />
+
+      <!-- スポット（絶対配置／%は画像基準でOK） -->
+      <button class="spot" id="spotA" style="top:77%;left:61%;">A</button>
+      <button class="spot" id="spotB" style="top:22%;left:56%;">B</button>
+      <button class="spot" id="spotC" style="top:49%;left:37%;">C</button>
+
+      <div class="spot disabled" id="spotD" style="top:10%;left:28%;">D</div>
+      <div class="spot disabled" id="spotE" style="top:36%;left:40%;">E</div>
+      <div class="spot disabled" id="spotF" style="top:32%;left:52%;">F</div>
+      <div class="spot disabled" id="spotD" style="top:53%;left:40%;">G</div>
+      <div class="spot disabled" id="spotE" style="top:53%;left:45%;">H</div>
+      <div class="spot disabled" id="spotF" style="top:70%;left:51%;">I</div>
+      <div class="spot disabled" id="spotF" style="top:61%;left:54%;">J</div>
+
+      <button class="spot locked" id="spotO" style="top:45%;left:74%;">O</button>
+    </div>
+
+    <!-- メッセージ枠（スマホでは下部に張り付き、スクロール可） -->
+    <section id="message">
+      <h2>メッセージ</h2>
+      <div id="message-body">
+        ここにゲームの指示やログを表示します。アイテム獲得やヒントなど。
+      </div>
+    </section>
+  </div>
+
+  <!-- 所持アイテム（必要なら残す） -->
+  <div id="inventory">
+    アイテム: <span id="items">なし</span>
+  </div>
+</div>
+
+    <!-- 所持アイテム表示 -->
+    <div id="inventory">
+      アイテム: <span id="items">なし</span>
+    </div>
+  </div>
+
+  <!-- ポップアップ -->
+  <div id="popup" style="display:none;">
+    <div id="popup-content">
+      <p id="popup-text"></p>
+      <button id="popup-close">OK</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

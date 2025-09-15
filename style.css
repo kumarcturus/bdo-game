@@ -1,0 +1,98 @@
+/* 画面全体の背景に haikei.jpg */
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: url("haikei.jpg") center/cover fixed no-repeat;
+  /* iOSの下部安全域に配慮 */
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  color: #111;
+}
+
+/* ページ縦並び・上から配置。画面に収まらなければ縦スクロール */
+.page {
+  min-height: 100dvh;   /* スマホのURLバー考慮 */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+}
+
+/* マップ：画像の実サイズ比で拡縮。幅いっぱい、縦は画像に従う（切れない・歪まない） */
+#map-wrap {
+  position: relative;
+  width: min(100%, 900px);  /* 最大幅はお好みで */
+  margin: 0 auto 8px auto;
+}
+#map-img {
+  display: block;
+  width: 100%;
+  height: auto;          /* これで比率を保持しながら縮小、上下切れなし */
+  object-fit: contain;   /* 念のため */
+  object-position: top left;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+
+/* スポット：#map-wrapに対して%指定で安定。中心合わせ推奨 */
+.spot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 6px 10px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.82);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+.spot.disabled {
+  background: rgba(180,180,180,0.55);
+  border: 1px dashed #666;
+  cursor: default;
+}
+.spot.locked {
+  background: rgba(120,120,120,0.75);
+  cursor: not-allowed;
+}
+
+/* メッセージ枠：スマホでは常に画面下に見えるよう sticky。PCでは通常配置。 */
+#message {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px 12px max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-bottom));
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+  backdrop-filter: saturate(1.1) blur(2px);
+}
+#message h2 {
+  font-size: 1rem;
+  margin: 0;
+  padding: 10px 12px 0 12px;
+}
+#message-body {
+  padding: 10px 12px 12px 12px;
+  max-height: 36vh;    /* スマホで地図と同時視認できる高さ */
+  overflow: auto;
+}
+
+/* スマホ向け：メッセージ枠を下に貼り付けて常時見える */
+@media (max-width: 768px) {
+  #message {
+    position: sticky;
+    bottom: 0; /* 下端に吸着 */
+    margin-bottom: 0;
+  }
+}
+
+/* 所持アイテムは軽く */
+#inventory {
+  width: min(100%, 900px);
+  margin: 0 auto 16px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 10px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
