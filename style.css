@@ -199,3 +199,75 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
+
+/* ===== メッセージボックス内フォント設定 ===== */
+
+/* 全体のベースフォントは既に system-ui, sans-serif なので変更不要 */
+
+/* 各文章の基本スタイル */
+.msg { 
+  margin: 6px 0;
+  line-height: 1.6;
+}
+
+/* ファンタジー風（見出し系） */
+.msg-fantasy {
+  font-family: "Yuji Mai", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+/* 普通の説明文 */
+.msg-normal {
+  font-family: "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+/* ===== スタート画面 ===== */
+#start-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.6); /* 背景を薄暗く */
+  z-index: 1000;
+  text-align: center;
+}
+
+/* タイトル */
+#game-title {
+  font-family: 'MedievalSharp', 'Yuji Mai', serif;
+  font-size: clamp(2.5rem, 8vw, 5rem); /* 横幅に合わせて自動調整 */
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.8), 0 0 18px rgba(255,215,0,0.7);
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+/* entryボタン */
+#start-btn {
+  font-family: 'MedievalSharp', serif;
+  font-size: 1.5rem;
+  padding: 12px 36px;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(255,255,255,0.8);
+}
+
+/* ホバー時の演出 */
+#start-btn:hover {
+  background: rgba(255,215,0,0.3);
+  color: #ffd700;
+  border-color: #ffd700;
+  transform: scale(1.05);
+}

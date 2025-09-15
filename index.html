@@ -4,13 +4,19 @@
   <meta charset="UTF-8">
   <title>Bloom Days Online</title><!-- もとは金沢ファンタジーマップ -->
   <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts（日本語対応）-->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Yuji+Mai&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Medieval風 -->
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <!-- スタート画面 -->
-  <div id="start-screen">
-    <h1>Bllom Days Online</h1>
-    <button id="start-btn">スタート</button>
-  </div>
+<div id="start-screen">
+  <h1 id="game-title">Bloom Days Online</h1>
+  <button id="start-btn">Entry</button>
+</div>
+
 
 <!-- 説明画面 -->
 <div id="intro-screen" style="display:none;">
@@ -51,10 +57,13 @@
 
     <!-- メッセージ枠（スマホでは下部に張り付き、スクロール可） -->
     <section id="message">
-      <h2>メッセージ</h2>
-      <div id="message-body">
-        ここにゲームの指示やログを表示します。アイテム獲得やヒントなど。
-      </div>
+      <h2>巻物</h2>
+        <div id="message-body">
+          <p class="msg msg-fantasy">伝承の神殿、黄金の神殿、聖玉(仮)の神殿を巡り、【伝承の言葉】【伝統の御守り】【伝統のしるし】を獲得せよ</p>
+          <p class="msg msg-fantasy">3つのアイテムを揃えるとどこかのスポットの封印が解かれる</p>
+          <p class="msg msg-normal">チャレンジに成功（そのスポットにまつわるクイズに正答）することでアイテムを獲得</p>
+          <p class="msg msg-normal">ヒントは活動記録にあり、伝承の神殿、黄金の神殿、聖玉の神殿に相当する金沢の有名スポットを地図上に当てはめよう</p>
+        </div>
     </section>
   </div>
 
