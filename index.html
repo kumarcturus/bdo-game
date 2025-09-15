@@ -58,14 +58,30 @@
     </div>
   </div>
 
-  <!-- ポップアップ -->
-  <div id="popup" style="display:none;">
-    <div id="popup-content">
-      <p id="popup-text"></p>
-      <button id="popup-close">OK</button>
-    </div>
-  </div>
 
-  <script src="script.js"></script>
+
+<!-- ポップアップ -->
+<div id="popup" style="display:none;">
+  <div id="popup-content">
+
+    <!-- 通常表示 -->
+    <p id="popup-text"></p>
+
+    <!-- クイズ表示 -->
+    <div id="quiz-area" style="display:none;">
+      <p id="quiz-question"></p>
+      <input type="text" id="quiz-answer" placeholder="ひらがなで入力">
+      <div>
+        <button id="quiz-submit">送信</button>
+        <button id="quiz-cancel">キャンセル</button>
+      </div>
+    </div>
+
+    <button id="popup-close">OK</button>
+  </div>
+</div>
+
 </body>
 </html>
+
+  <script src="script.js"></script>
