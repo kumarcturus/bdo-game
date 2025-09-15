@@ -145,47 +145,56 @@ body {
 }
 
 
-/* クイズポップアップ全体 */
-#quiz-popup {
+/* ポップアップ全体 */
+#popup {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex;
+  background: rgba(0,0,0,0.7);
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
 
 /* ポップアップウィンドウ */
-#quiz-content {
+#popup-content {
   background: #fff;
-  padding: 20px;
   border-radius: 12px;
+  padding: 20px;
   max-width: 90%;
-  width: 300px;
+  width: 400px;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  position: relative;
 }
 
-#quiz-question {
-  font-size: 16px;
-  margin-bottom: 12px;
+/* 画像エリア */
+#popup-image-container {
+  margin-bottom: 15px;
+}
+#popup-image {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+/* クイズエリア */
+#quiz-area {
+  margin-top: 10px;
+}
 #quiz-answer {
   width: 80%;
   padding: 6px;
-  margin-bottom: 12px;
-  font-size: 16px;
+  margin-bottom: 10px;
 }
-
-#quiz-buttons {
-  display: flex;
-  justify-content: space-around;
-}
-
 #quiz-buttons button {
+  margin: 0 5px;
+  padding: 6px 12px;
+}
+
+/* 閉じるボタン */
+#popup-close {
+  margin-top: 15px;
   padding: 6px 12px;
   font-size: 14px;
   cursor: pointer;

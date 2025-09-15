@@ -76,22 +76,26 @@
 <div id="popup" style="display:none;">
   <div id="popup-content">
 
-    <!-- 通常表示 -->
-    <p id="popup-text"></p>
+    <!-- 画像表示エリア -->
+    <div id="popup-image-container">
+      <img id="popup-image" src="" alt="スポット画像">
+    </div>
 
-    <!-- クイズ表示 -->
+    <!-- クイズ表示エリア（A/B/C/Oのみ表示） -->
     <div id="quiz-area" style="display:none;">
       <p id="quiz-question"></p>
-      <input type="text" id="quiz-answer" placeholder="ひらがなで入力">
-      <div>
+      <input type="text" id="quiz-answer" placeholder="ひらがなで入力" />
+      <div id="quiz-buttons">
         <button id="quiz-submit">送信</button>
         <button id="quiz-cancel">キャンセル</button>
       </div>
     </div>
 
-    <button id="popup-close">OK</button>
+    <!-- 閉じるボタン -->
+    <button id="popup-close">閉じる</button>
   </div>
 </div>
+
 
 </body>
 </html>

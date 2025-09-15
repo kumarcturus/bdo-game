@@ -6,9 +6,10 @@ let currentSpot = null;
 
 // クイズ問題集
 const quizData = {
-  A: { q: "Q. 金沢駅前にある有名な門の名前は○○○門", a: "つづみ" },
-  B: { q: "Q. 金沢で金箔が有名なのは…○○○の高い気候", a: "しつど" },
-  C: { q: "Q. 兼六園ともう一つは岡山の○○○○園", a: "こうらく" }
+  A: { q: "Q. 金沢駅前にある有名な門の名前は○○門（つづみ）", a: "つづみ" },
+  B: { q: "Q. 金沢で金箔が有名なのは…○○○の高い気候（しつど）", a: "しつど" },
+  C: { q: "Q. 兼六園ともう一つは岡山の○○○園（こうらく）", a: "こうらく" },
+  O: { q: "Q. 最終問題：アイテムA,B,Cを集めて解放、答えはかなざわ", a: "かなざわ" }
 };
 
 // ----------------------------
@@ -28,57 +29,58 @@ document.getElementById("intro-next-btn").onclick = () => {
 };
 
 
-
 // ----------------------------
-// ポップアップ表示系
+// スポットを押したとき
 // ----------------------------
-
-// 通常ポップアップ表示
-function showNormalPopup(message) {
-  document.getElementById("popup-text").innerText = message;
-  document.getElementById("popup-text").style.display = "block";
-  document.getElementById("quiz-area").style.display = "none";
-  document.getElementById("popup").style.display = "flex";
-}
-
-// クイズポップアップ表示
-function showQuizPopup(spotId) {
+function openSpotPopup(spotId) {
   currentSpot = spotId;
-  document.getElementById("quiz-question").innerText = quizData[spotId].q;
-  document.getElementById("quiz-answer").value = "";
 
-  document.getElementById("popup-text").style.display = "none";
-  document.getElementById("quiz-area").style.display = "block";
+  // スポット画像表示
+  const imagePath = `spot${spotId}.jpg`;
+  document.getElementById("popup-image").src = imagePath;
+
+  // ABCOならクイズを表示、それ以外は非表示
+  if (quizData[spotId]) {
+    document.getElementById("quiz-area").style.display = "block";
+    document.getElementById("quiz-question").innerText = quizData[spotId].q;
+  } else {
+    document.getElementById("quiz-area").style.display = "none";
+  }
+
+  // ポップアップ表示
   document.getElementById("popup").style.display = "flex";
 }
 
-// ポップアップを閉じる
-document.getElementById("popup-close").onclick = () => {
-  document.getElementById("popup").style.display = "none";
-};
-
 // ----------------------------
-// クイズ判定
+// クイズ回答処理
 // ----------------------------
 document.getElementById("quiz-submit").onclick = () => {
-  const answer = document.getElementById("quiz-answer").value.trim();
-  const correct = quizData[currentSpot].a;
+  const userAnswer = document.getElementById("quiz-answer").value.trim();
+  const correctAnswer = quizData[currentSpot].a;
 
-  if (answer === correct) {
-    // 正解 → アイテム獲得
+  if (userAnswer === correctAnswer) {
+    // 正解時：同じポップアップでアイテム画像に切り替える
+    const itemImage = `item${currentSpot}.jpg`;
+    document.getElementById("popup-image").src = itemImage;
+
+    // クイズを非表示にする
+    document.getElementById("quiz-area").style.display = "none";
+
+    // アイテム獲得処理
     getItem(currentSpot);
-    showNormalPopup("正解！アイテムを獲得しました。");
+
   } else {
-    alert("不正解です。もう一度挑戦しましょう。");
+    alert("不正解です。もう一度挑戦してください。");
   }
 };
 
+// キャンセル
 document.getElementById("quiz-cancel").onclick = () => {
   document.getElementById("popup").style.display = "none";
 };
 
 // ----------------------------
-// アイテム関連処理
+// アイテム管理
 // ----------------------------
 function getItem(name) {
   if (!items[name]) {
@@ -89,36 +91,31 @@ function getItem(name) {
 }
 
 function updateInventory() {
-  const owned = Object.keys(items).filter(key => items[key]);
+  const owned = Object.keys(items).filter(k => items[k]);
   document.getElementById("items").innerText = owned.length ? owned.join(", ") : "なし";
 }
 
-// O解放チェック
 function checkUnlock() {
   if (items.A && items.B && items.C) {
     const spotO = document.getElementById("spotO");
     spotO.classList.remove("locked");
-    spotO.onclick = () => {
-      getItem("O");
-      showNormalPopup("アイテムOを獲得！ゲームクリア！");
-    };
   }
 }
 
 // ----------------------------
-// スポットクリック設定
+// 閉じる処理
 // ----------------------------
-// A, B, C → クイズ
-document.getElementById("spotA").onclick = () => showQuizPopup("A");
-document.getElementById("spotB").onclick = () => showQuizPopup("B");
-document.getElementById("spotC").onclick = () => showQuizPopup("C");
+document.getElementById("popup-close").onclick = () => {
+  document.getElementById("popup").style.display = "none";
+};
 
-// D〜N → 通常ポップアップ（説明のみ）
-["D", "E", "F", "G", "H", "I", "J"].forEach(id => {
+// ----------------------------
+// スポットイベント登録
+// ----------------------------
+const spotIds = ["A","B","C","D","E","F","G","H","I","J","O"];
+spotIds.forEach(id => {
   const spot = document.getElementById(`spot${id}`);
   if (spot) {
-    spot.onclick = () => {
-      showNormalPopup(`スポット${id}の説明です。`);
-    };
+    spot.onclick = () => openSpotPopup(id);
   }
 });
