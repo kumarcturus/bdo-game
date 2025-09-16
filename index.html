@@ -24,13 +24,23 @@
 <!-- 説明画面 -->
 <div id="intro-screen" style="display:none;">
   <div class="intro-container">
-    <!-- 説明画像（中央表示） -->
+    <!-- 背景画像 -->
     <img id="intro-image" src="intro.jpg" alt="説明画像">
 
-    <!-- 進むボタン（下部中央） -->
+    <!-- 重ねるストーリー文 -->
+    <div id="intro-text">
+      KANAZAWAに迫る滅びの影――<br>
+      勇者よ、各地を巡り伝承のアイテムを集めよ。<br>
+      すべてを揃えしとき、<br>
+      この王宮の封印が解かれ、<br>
+      KANAZAWAは再び光を取り戻すだろう。
+    </div>
+
+    <!-- 進むボタン -->
     <button id="intro-next-btn">進む</button>
   </div>
 </div>
+
 
 
   <!-- マップ画面 -->
@@ -47,13 +57,13 @@
       <button class="spot" id="spotB" style="top:22%;left:56%;">B</button>
       <button class="spot" id="spotC" style="top:49%;left:37%;">C</button>
 
-      <div class="spot disabled" id="spotD" style="top:10%;left:28%;">D</div>
-      <div class="spot disabled" id="spotE" style="top:36%;left:40%;">E</div>
-      <div class="spot disabled" id="spotF" style="top:32%;left:52%;">F</div>
-      <div class="spot disabled" id="spotG" style="top:53%;left:40%;">G</div>
-      <div class="spot disabled" id="spotH" style="top:53%;left:45%;">H</div>
-      <div class="spot disabled" id="spotI" style="top:70%;left:51%;">I</div>
-      <div class="spot disabled" id="spotJ" style="top:61%;left:54%;">J</div>
+      <button class="spot disabled" id="spotD" style="top:10%;left:28%;">D</button>
+      <button class="spot disabled" id="spotE" style="top:36%;left:40%;">E</button>
+      <button class="spot disabled" id="spotF" style="top:32%;left:52%;">F</button>
+      <button class="spot disabled" id="spotG" style="top:53%;left:40%;">G</button>
+      <button class="spot disabled" id="spotH" style="top:53%;left:45%;">H</button>
+      <button class="spot disabled" id="spotI" style="top:70%;left:51%;">I</button>
+      <button class="spot disabled" id="spotJ" style="top:61%;left:54%;">J</button>
 
 
       <button class="spot locked" id="spotO" style="top:45%;left:74%;">O</button>
@@ -63,10 +73,11 @@
     <section id="message">
       <h2>巻物</h2>
         <div id="message-body">
-          <p class="msg msg-fantasy">伝承の神殿、黄金の神殿、聖玉(仮)の神殿を巡り、【伝承の言葉】【伝統の御守り】【伝統のしるし】を獲得せよ</p>
-          <p class="msg msg-fantasy">3つのアイテムを揃えるとどこかのスポットの封印が解かれる</p>
-          <p class="msg msg-normal">チャレンジに成功（そのスポットにまつわるクイズに正答）することでアイテムを獲得</p>
-          <p class="msg msg-normal">ヒントは活動記録にあり、伝承の神殿、黄金の神殿、聖玉の神殿に相当する金沢の有名スポットを地図上に当てはめよう</p>
+          <p class="msg msg-fantasy">伝承の神殿、黄金の神殿、彩玉の神殿で【伝承の言葉】【伝統のしるし】【伝統の御守り】を獲得せよ。</p>
+          <p class="msg msg-fantasy">全ての地を巡った後、三つのアイテムを携えて王宮に戻り、封印を解いてKANAZAWAに光を取り戻せ。</p>
+          <br>
+          <p class="msg msg-normal gray-text">神殿でチャレンジに成功（そのスポットにまつわるクイズに正答）することでアイテムを獲得できます。</p>
+          <p class="msg msg-normal gray-text">伝承の神殿、黄金の神殿、彩玉の神殿が指す金沢のスポットを地図上で探し当てましょう。</p>
         </div>
     </section>
   </div>
@@ -78,17 +89,16 @@
 </div>
 
 
-
-<!-- ポップアップ全体 -->
+<!-- ポップアップ -->
 <div id="popup" style="display:none;">
   <div id="popup-content">
-    
+
     <!-- 画像表示エリア -->
     <div id="popup-image-container">
       <img id="popup-image" src="" alt="スポット画像">
     </div>
 
-    <!-- クイズ表示エリア -->
+    <!-- クイズエリア -->
     <div id="quiz-area" style="display:none;">
       <p id="quiz-question"></p>
       <input type="text" id="quiz-answer" placeholder="ひらがなで入力" />
@@ -98,17 +108,21 @@
       </div>
     </div>
 
-    <!-- Oスポットクリア後のテキスト重ね用 -->
+    <!-- Oスポット正解後の進むボタン -->
+    <div id="popup-next-area" style="display:none;">
+      <button id="popup-next-btn">進む</button>
+    </div>
+
+    <!-- Oスポット最終報酬（リワード） -->
     <div id="reward-overlay" style="display:none;">
       <p id="reward-name"></p>
       <p id="reward-date"></p>
     </div>
 
-    <!-- 閉じるボタン（ここが最後） -->
+    <!-- 閉じるボタン -->
     <button id="popup-close">閉じる</button>
-    
-  </div> <!-- /#popup-content -->
-</div> <!-- /#popup -->
+  </div>
+</div><!-- /#popup -->
 
 
 
