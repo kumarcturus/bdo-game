@@ -1,3 +1,7 @@
+/* ===============================
+   基本設定
+   =============================== */
+
 /* 画面全体の背景に haikei.jpg */
 html, body {
   height: 100%;
@@ -20,13 +24,15 @@ body {
   padding: 12px;
 }
 
-/* 説明画面全体を中央配置 */
+/* ===============================
+   説明画面
+   =============================== */
 #intro-screen {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85); /* 背景暗く */
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,30 +66,29 @@ body {
   background-color: #ffffffcc;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
-
 #intro-next-btn:hover {
   background-color: #fff;
 }
 
-
-
-/* マップ：画像の実サイズ比で拡縮。幅いっぱい、縦は画像に従う（切れない・歪まない） */
+/* ===============================
+   マップ表示
+   =============================== */
 #map-wrap {
   position: relative;
-  width: min(100%, 900px);  /* 最大幅はお好みで */
+  width: min(100%, 900px);
   margin: 0 auto 8px auto;
 }
 #map-img {
   display: block;
   width: 100%;
-  height: auto;          /* これで比率を保持しながら縮小、上下切れなし */
-  object-fit: contain;   /* 念のため */
+  height: auto;
+  object-fit: contain;
   object-position: top left;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,.2);
 }
 
-/* スポット：#map-wrapに対して%指定で安定。中心合わせ推奨 */
+/* スポット */
 .spot {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -105,7 +110,9 @@ body {
   cursor: not-allowed;
 }
 
-/* メッセージ枠：スマホでは常に画面下に見えるよう sticky。PCでは通常配置。 */
+/* ===============================
+   メッセージ枠
+   =============================== */
 #message {
   width: min(100%, 900px);
   margin: 0 auto;
@@ -121,20 +128,22 @@ body {
 }
 #message-body {
   padding: 10px 12px 12px 12px;
-  max-height: 36vh;    /* スマホで地図と同時視認できる高さ */
+  max-height: 36vh;
   overflow: auto;
 }
 
-/* スマホ向け：メッセージ枠を下に貼り付けて常時見える */
+/* スマホ向け：メッセージ枠を下に固定 */
 @media (max-width: 768px) {
   #message {
     position: sticky;
-    bottom: 0; /* 下端に吸着 */
+    bottom: 0;
     margin-bottom: 0;
   }
 }
 
-/* 所持アイテムは軽く */
+/* ===============================
+   所持アイテム表示
+   =============================== */
 #inventory {
   width: min(100%, 900px);
   margin: 0 auto 16px;
@@ -144,8 +153,9 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,.12);
 }
 
-
-/* ポップアップ全体 */
+/* ===============================
+   ポップアップ
+   =============================== */
 #popup {
   position: fixed;
   top: 0; left: 0;
@@ -157,7 +167,6 @@ body {
   z-index: 9999;
 }
 
-/* ポップアップウィンドウ */
 #popup-content {
   background: #fff;
   border-radius: 12px;
@@ -165,7 +174,7 @@ body {
   max-width: 90%;
   width: 400px;
   text-align: center;
-  position: relative;
+  position: relative; /* reward-overlayを重ねるため */
 }
 
 /* 画像エリア */
@@ -200,31 +209,65 @@ body {
   cursor: pointer;
 }
 
-/* ===== メッセージボックス内フォント設定 ===== */
+/* ===============================
+   Oスポット クリア後のリワードオーバーレイ
+   =============================== */
+#reward-overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  pointer-events: none;
+  text-align: center;
+  color: #4b2c10;
+  font-family: "Yuji Mai", serif;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.7);
+}
 
-/* 全体のベースフォントは既に system-ui, sans-serif なので変更不要 */
+/* ニックネーム：画像中央 */
+#reward-name {
+  position: absolute;
+  top: 45%;               /* 中央寄せ */
+  left: 50%;
+  transform: translate(-50%, -50%); /* 完全中央 */
+  width: 100%;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+}
 
-/* 各文章の基本スタイル */
+/* クリア日：ニックネームのすぐ下 */
+#reward-date {
+  position: absolute;
+  top: calc(50% + 1rem); /* ニックネームより少し下 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+
+/* ===============================
+   フォント設定
+   =============================== */
 .msg { 
   margin: 6px 0;
   line-height: 1.6;
 }
-
-/* ファンタジー風（見出し系） */
 .msg-fantasy {
   font-family: "Yuji Mai", "Yu Mincho", "Hiragino Mincho ProN", serif;
   font-size: 1.05rem;
   letter-spacing: 0.02em;
 }
-
-/* 普通の説明文 */
 .msg-normal {
   font-family: "Noto Sans JP", system-ui, -apple-system, sans-serif;
   font-size: 0.95rem;
   opacity: 0.95;
 }
 
-/* ===== スタート画面 ===== */
+/* ===============================
+   スタート画面
+   =============================== */
 #start-screen {
   position: fixed;
   top: 0; left: 0;
@@ -234,15 +277,14 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.6); /* 背景を薄暗く */
+  background: rgba(0,0,0,0.6);
   z-index: 1000;
   text-align: center;
 }
 
-/* タイトル */
 #game-title {
   font-family: 'MedievalSharp', 'Yuji Mai', serif;
-  font-size: clamp(2.5rem, 8vw, 5rem); /* 横幅に合わせて自動調整 */
+  font-size: clamp(2.5rem, 8vw, 5rem);
   color: #fff;
   text-shadow: 0 0 8px rgba(255,255,255,0.8), 0 0 18px rgba(255,215,0,0.7);
   margin-bottom: 40px;
@@ -250,7 +292,6 @@ body {
   line-height: 1.2;
 }
 
-/* entryボタン */
 #start-btn {
   font-family: 'MedievalSharp', serif;
   font-size: 1.5rem;
@@ -263,8 +304,6 @@ body {
   transition: all 0.3s ease;
   text-shadow: 0 0 5px rgba(255,255,255,0.8);
 }
-
-/* ホバー時の演出 */
 #start-btn:hover {
   background: rgba(255,215,0,0.3);
   color: #ffd700;

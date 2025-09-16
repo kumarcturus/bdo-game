@@ -4,6 +4,12 @@
 let items = { A: false, B: false, C: false, O: false };
 let currentSpot = null;
 
+// A〜J 訪問フラグ（Oは含めない）
+let visited = { A:false, B:false, C:false, D:false, E:false, F:false, G:false, H:false, I:false, J:false };
+
+// プレイヤーネーム
+let playerName = "";
+
 // クイズ問題集
 const quizData = {
   A: { q: "Q. 金沢駅前にある有名な門の名前は○○門（つづみ）", a: "つづみ" },
@@ -15,19 +21,28 @@ const quizData = {
 // ----------------------------
 // 画面切り替え
 // ----------------------------
-
-// スタートボタンを押したら → 説明画面へ
 document.getElementById("start-btn").onclick = () => {
+  const input = document.getElementById("nickname-input")?.value?.trim() ?? "";
+  playerName = input || "勇者";
   document.getElementById("start-screen").style.display = "none";
-  document.getElementById("intro-screen").style.display = "flex"; // ここで説明画面を表示
+  document.getElementById("intro-screen").style.display = "flex";
 };
 
-// 進むボタンを押したら → マップ画面へ
 document.getElementById("intro-next-btn").onclick = () => {
   document.getElementById("intro-screen").style.display = "none";
-  document.getElementById("map-screen").style.display = "block"; // ここでマップを表示
+  document.getElementById("map-screen").style.display = "block";
+  checkUnlock(); // 初期状態でOをロック表示
 };
 
+// ----------------------------
+// ユーティリティ
+// ----------------------------
+function allVisitedAJ() {
+  return Object.keys(visited).every(k => visited[k]);
+}
+function allABCItemsCollected() {
+  return items.A && items.B && items.C;
+}
 
 // ----------------------------
 // スポットを押したとき
@@ -35,52 +50,82 @@ document.getElementById("intro-next-btn").onclick = () => {
 function openSpotPopup(spotId) {
   currentSpot = spotId;
 
-  // スポット画像表示
-  const imagePath = `spot${spotId}.jpg`;
-  document.getElementById("popup-image").src = imagePath;
+  // O以外は訪問フラグON
+  if (spotId !== "O" && visited.hasOwnProperty(spotId)) {
+    visited[spotId] = true;
+  }
 
-  // ABCOならクイズを表示、それ以外は非表示
+  // スポット画像
+  document.getElementById("popup-image").src = `spot${spotId}.jpg`;
+
+  // リワードオーバーレイは毎回隠す（Oを開いた時点では絶対に出さない）
+  const rewardOverlay = document.getElementById("reward-overlay");
+  rewardOverlay.style.display = "none";
+
+  // クイズ表示制御
   if (quizData[spotId]) {
     document.getElementById("quiz-area").style.display = "block";
-    document.getElementById("quiz-question").innerText = quizData[spotId].q;
+    document.getElementById("quiz-answer").value = "";
+
+    if (spotId === "O" && !allABCItemsCollected()) {
+      // OはABCが揃うまで黒塗り
+      document.getElementById("quiz-question").innerText = "■■■■■■■■■■■■■■■■■■■■■■■■";
+    } else {
+      document.getElementById("quiz-question").innerText = quizData[spotId].q;
+    }
   } else {
     document.getElementById("quiz-area").style.display = "none";
   }
 
-  // ポップアップ表示
+  // 表示
   document.getElementById("popup").style.display = "flex";
+
+  // Oのロック更新
+  checkUnlock();
 }
 
 // ----------------------------
 // クイズ回答処理
 // ----------------------------
 document.getElementById("quiz-submit").onclick = () => {
-  const userAnswer = document.getElementById("quiz-answer").value.trim();
-  const correctAnswer = quizData[currentSpot].a;
+  const ans = document.getElementById("quiz-answer").value.trim();
 
-  if (userAnswer === correctAnswer) {
-    // 正解時：同じポップアップでアイテム画像に切り替える
-    const itemImage = `item${currentSpot}.jpg`;
-    document.getElementById("popup-image").src = itemImage;
+  // OはABCが揃うまで解答不可
+  if (currentSpot === "O" && !allABCItemsCollected()) {
+    alert("まだ問題文が読めない… まずはアイテムA,B,Cを手に入れよう。");
+    return;
+  }
 
-    // クイズを非表示にする
+  const correct = quizData[currentSpot]?.a;
+  if (!correct) return;
+
+  if (ans === correct) {
+    // 正解 → アイテム画像へ
+    document.getElementById("popup-image").src = `item${currentSpot}.jpg`;
     document.getElementById("quiz-area").style.display = "none";
-
-    // アイテム獲得処理
     getItem(currentSpot);
+
+    // ★ Oの正解時だけ、同じポップアップ上にリワードテキストを重ねる
+    if (currentSpot === "O") {
+      const today = new Date();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+      document.getElementById("reward-name").innerText = `【${playerName}】`;
+      document.getElementById("reward-date").innerText = `蓮華暦105年　${month}月　${day}日`;
+      document.getElementById("reward-overlay").style.display = "block";
+    }
 
   } else {
     alert("不正解です。もう一度挑戦してください。");
   }
 };
 
-// キャンセル
 document.getElementById("quiz-cancel").onclick = () => {
   document.getElementById("popup").style.display = "none";
 };
 
 // ----------------------------
-// アイテム管理
+// アイテム・ロック
 // ----------------------------
 function getItem(name) {
   if (!items[name]) {
@@ -96,26 +141,37 @@ function updateInventory() {
 }
 
 function checkUnlock() {
-  if (items.A && items.B && items.C) {
-    const spotO = document.getElementById("spotO");
-    spotO.classList.remove("locked");
+  const spotO = document.getElementById("spotO");
+  if (!spotO) return;
+  if (allVisitedAJ()) {
+    spotO.classList.remove("locked"); // A〜J訪問済みで解放
+  } else {
+    spotO.classList.add("locked");
   }
 }
 
 // ----------------------------
-// 閉じる処理
+// 閉じる
 // ----------------------------
 document.getElementById("popup-close").onclick = () => {
   document.getElementById("popup").style.display = "none";
 };
 
 // ----------------------------
-// スポットイベント登録
+// スポット登録
 // ----------------------------
-const spotIds = ["A","B","C","D","E","F","G","H","I","J","O"];
-spotIds.forEach(id => {
-  const spot = document.getElementById(`spot${id}`);
-  if (spot) {
-    spot.onclick = () => openSpotPopup(id);
-  }
+["A","B","C","D","E","F","G","H","I","J"].forEach(id => {
+  const el = document.getElementById(`spot${id}`);
+  if (el) el.onclick = () => openSpotPopup(id);
 });
+
+const spotO = document.getElementById("spotO");
+if (spotO) {
+  spotO.onclick = () => {
+    if (spotO.classList.contains("locked")) {
+      alert("まだ封印されている… A〜Jすべてを巡ろう。");
+      return;
+    }
+    openSpotPopup("O"); // この時点ではリワードを出さない
+  };
+}

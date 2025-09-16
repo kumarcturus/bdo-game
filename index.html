@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Bloom Days Online</title><!-- もとは金沢ファンタジーマップ -->
+  <title>Bloom Days Online</title>
   <link rel="stylesheet" href="style.css">
   <!-- Google Fonts（日本語対応）-->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Yuji+Mai&display=swap" rel="stylesheet">
@@ -11,11 +11,14 @@
 
 </head>
 <body>
-  <!-- スタート画面 -->
+
+<!-- スタート画面 -->
 <div id="start-screen">
   <h1 id="game-title">Bloom Days Online</h1>
-  <button id="start-btn">Entry</button>
+  <input type="text" id="nickname-input" placeholder="ニックネームを入力" maxlength="10">
+  <button id="start-btn">entry</button>
 </div>
+
 
 
 <!-- 説明画面 -->
@@ -47,10 +50,11 @@
       <div class="spot disabled" id="spotD" style="top:10%;left:28%;">D</div>
       <div class="spot disabled" id="spotE" style="top:36%;left:40%;">E</div>
       <div class="spot disabled" id="spotF" style="top:32%;left:52%;">F</div>
-      <div class="spot disabled" id="spotD" style="top:53%;left:40%;">G</div>
-      <div class="spot disabled" id="spotE" style="top:53%;left:45%;">H</div>
-      <div class="spot disabled" id="spotF" style="top:70%;left:51%;">I</div>
-      <div class="spot disabled" id="spotF" style="top:61%;left:54%;">J</div>
+      <div class="spot disabled" id="spotG" style="top:53%;left:40%;">G</div>
+      <div class="spot disabled" id="spotH" style="top:53%;left:45%;">H</div>
+      <div class="spot disabled" id="spotI" style="top:70%;left:51%;">I</div>
+      <div class="spot disabled" id="spotJ" style="top:61%;left:54%;">J</div>
+
 
       <button class="spot locked" id="spotO" style="top:45%;left:74%;">O</button>
     </div>
@@ -73,24 +77,18 @@
   </div>
 </div>
 
-    <!-- 所持アイテム表示 -->
-    <div id="inventory">
-      アイテム: <span id="items">なし</span>
-    </div>
-  </div>
 
 
-
-<!-- ポップアップ -->
+<!-- ポップアップ全体 -->
 <div id="popup" style="display:none;">
   <div id="popup-content">
-
+    
     <!-- 画像表示エリア -->
     <div id="popup-image-container">
       <img id="popup-image" src="" alt="スポット画像">
     </div>
 
-    <!-- クイズ表示エリア（A/B/C/Oのみ表示） -->
+    <!-- クイズ表示エリア -->
     <div id="quiz-area" style="display:none;">
       <p id="quiz-question"></p>
       <input type="text" id="quiz-answer" placeholder="ひらがなで入力" />
@@ -100,13 +98,21 @@
       </div>
     </div>
 
-    <!-- 閉じるボタン -->
+    <!-- Oスポットクリア後のテキスト重ね用 -->
+    <div id="reward-overlay" style="display:none;">
+      <p id="reward-name"></p>
+      <p id="reward-date"></p>
+    </div>
+
+    <!-- 閉じるボタン（ここが最後） -->
     <button id="popup-close">閉じる</button>
-  </div>
-</div>
+    
+  </div> <!-- /#popup-content -->
+</div> <!-- /#popup -->
 
 
+
+<script src="script.js"></script>
 </body>
 </html>
-
-  <script src="script.js"></script>
+  
