@@ -148,6 +148,11 @@ function offerItemsToUnlock() {
 // クイズ回答処理
 // ----------------------------
 function quizSubmitHandler() {
+  
+  // ★ スマホ対策：ズームリセットして表示を安定化
+  document.body.style.zoom = "1.0";
+  window.scrollTo(0, 0); // 画面をトップに戻す
+  
   const ans = document.getElementById("quiz-answer").value.trim();
   const correct = quizData[currentSpot]?.a;
   if (!correct) return;
@@ -212,11 +217,6 @@ function getItem(name) {
   }
 }
 
-/*
-function updateInventory() {
-  const owned = Object.keys(items).filter(k => items[k]);
-  document.getElementById("items").innerText = owned.length ? owned.join(", ") : "なし";
-}*/
 
 function checkUnlock() {
   const spotO = document.getElementById("spotO");
