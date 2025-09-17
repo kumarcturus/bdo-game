@@ -176,27 +176,13 @@ body {
 /* ===============================
    マップ表示
    =============================== */
-/*
-   #map-wrap {
-  position: relative;
-  width: min(100%, 900px);
-  margin: 0 auto 8px auto;
-}
-#map-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: top left;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.2);
-}*/
 
 /* デフォルト（PC） */
 #map-wrap {
   position: relative;
   width: min(100%, 900px); /* PCは横長 */
   margin: 0 auto;
+  overflow: hidden; /* 念のため */
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
@@ -208,25 +194,40 @@ body {
   height: auto;
   object-fit: contain; /* 縦横比を維持して全体表示 */
   object-position: top center; /* 中央基準で表示 */
+  margin: 0 auto;
 }
 
 /* スマホ専用レイアウト */
 @media (max-width: 768px) {
+
+  /* 横スクロール禁止 */
+  body {
+    overflow-x: hidden;
+  }
+
+  #map-wrap {
+    overflow: hidden; /* 拡大分がはみ出しても横スクロールさせない */
+  }
+
+  #map-img {
+    transform: scale(1.8); /* 1.8倍拡大 */
+    transform-origin: center top; /* 中央揃えを維持 */
+  }
+
+  /*
   #map-wrap {
     width: 100%;
-    aspect-ratio: 1 / 1; /* 正方形枠 */
+    aspect-ratio: 1 / 1; 
     border-radius: 0;
   }
 
   #map-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 枠いっぱいに拡大 */
+    object-fit: cover;
     object-position: center;
-  }
+  }*/
 }
-
-
 
 
 /* スポット */
