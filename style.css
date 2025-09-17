@@ -348,8 +348,8 @@ body {
 
 @media (max-width: 768px) {
   #popup-content {
-    transform: scale(1.8); /* 1.8倍に拡大 */
-    transform-origin: center center; /* 中央を基準に拡大 */
+    transform: scale(1.8) !important; /* 強制適用 */
+    transform-origin: center center;
     max-width: 100%;
     width: 90%;
     height: auto;
@@ -357,9 +357,8 @@ body {
     box-sizing: border-box;
   }
 
-  /* 画面いっぱいに表示 */
   #popup {
-    align-items: stretch;
+    align-items: center; /* stretchではなくcenterに */
     justify-content: center;
   }
 }
