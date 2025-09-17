@@ -80,12 +80,23 @@
           <p class="msg msg-normal gray-text">伝承の神殿、黄金の神殿、彩玉の神殿が指す金沢のスポットを地図上で探し当てましょう。</p>
         </div>
     </section>
+
+    <!-- 所持アイテム表示エリア -->
+    <section id="inventory">
+      <h2>所持アイテム</h2>
+      <div id="inventory-images">
+        <img id="item-slot-A" src="item_null.jpg" alt="アイテムA">
+        <img id="item-slot-B" src="item_null.jpg" alt="アイテムB">
+        <img id="item-slot-C" src="item_null.jpg" alt="アイテムC">
+      </div>
+    </section>
+
   </div>
 
-  <!-- 所持アイテム（必要なら残す） -->
+  <!-- 所持アイテム（必要なら残す） 
   <div id="inventory">
     アイテム: <span id="items">なし</span>
-  </div>
+  </div>-->
 </div>
 
 
@@ -98,7 +109,15 @@
       <img id="popup-image" src="" alt="スポット画像">
     </div>
 
-    <!-- クイズエリア -->
+    <!-- Oスポット：虫食い問題文（初期状態） -->
+    <div id="quiz-mushiku" style="display:none;">
+      <p id="quiz-question-masked"></p>
+      <div id="mushiku-buttons">
+        <button id="offer-items-btn">アイテムを使う</button>
+      </div>
+    </div>
+
+    <!-- Oスポット：虫食い解除後の通常クイズ -->
     <div id="quiz-area" style="display:none;">
       <p id="quiz-question"></p>
       <input type="text" id="quiz-answer" placeholder="ひらがなで入力" />

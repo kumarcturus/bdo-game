@@ -111,7 +111,8 @@ body {
 /* ===============================
    マップ表示
    =============================== */
-#map-wrap {
+/*
+   #map-wrap {
   position: relative;
   width: min(100%, 900px);
   margin: 0 auto 8px auto;
@@ -124,7 +125,24 @@ body {
   object-position: top left;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}*/
+
+/* マップ画像をスマホ画面横いっぱいに */
+#map-wrap {
+  position: relative;
+  width: 100%; /* 横幅いっぱい */
+  max-width: 900px; /* PCでは最大900pxまで */
+  margin: 0 auto;
 }
+
+#map-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* アスペクト比維持 */
+  object-position: top center;
+}
+
 
 /* スポット */
 .spot {
@@ -154,24 +172,30 @@ body {
 /* ===============================
    メッセージ枠
    =============================== */
+/* ===== 巻物エリアを中央揃え ===== */
 #message {
   width: min(100%, 900px);
-  margin: 0 auto;
+  margin: 0 auto; /* 中央配置 */
   background: rgba(255,255,255,0.9);
-  border-radius: 12px 12px max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-bottom));
-  box-shadow: 0 6px 18px rgba(0,0,0,.2);
-  backdrop-filter: saturate(1.1) blur(2px);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  padding: 10px;
+  text-align: center; /* ★ 中央揃えに追加 */
 }
+
 #message h2 {
   font-size: 1rem;
-  margin: 0;
-  padding: 10px 12px 0 12px;
+  margin-bottom: 10px;
+  font-family: "Yuji Mai", serif;
 }
+
 #message-body {
   padding: 10px 12px 12px 12px;
   max-height: 36vh;
   overflow: auto;
+  text-align: center; /* ★ メッセージ本文も中央揃え */
 }
+
 
 /* スマホ向け：メッセージ枠を下に固定 */
 @media (max-width: 768px) {
@@ -185,14 +209,38 @@ body {
 /* ===============================
    所持アイテム表示
    =============================== */
+/* ===== 所持アイテムエリア ===== */
 #inventory {
   width: min(100%, 900px);
   margin: 0 auto 16px;
-  background: rgba(255,255,255,0.8);
-  border-radius: 10px;
-  padding: 8px 12px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  padding: 10px;
+  text-align: center;
 }
+
+#inventory h2 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-family: "Yuji Mai", serif;
+}
+
+#inventory-images {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+#inventory-images img {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #aaa;
+  border-radius: 8px;
+  background: #f0f0f0;
+  object-fit: contain;
+}
+
 
 /* ===============================
    ポップアップ
@@ -232,15 +280,40 @@ body {
 #quiz-area {
   margin-top: 10px;
 }
+/*
 #quiz-answer {
   width: 80%;
   padding: 6px;
   margin-bottom: 10px;
+}*/
+/* クイズ入力ボックス */
+#quiz-answer {
+  font-size: 16px; /* ★重要：16px以上にする */
+  padding: 8px;
+  width: 80%;
+  box-sizing: border-box;
 }
+
 #quiz-buttons button {
   margin: 0 5px;
   padding: 6px 12px;
 }
+
+#quiz-question-masked {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  background: #000;
+  color: #000; /* 黒塗りで不可視 */
+  padding: 8px;
+  border-radius: 5px;
+  text-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+
+#mushiku-buttons button {
+  margin: 0 5px;
+  padding: 8px 12px;
+}
+
 
 /* 閉じるボタン */
 #popup-close {
