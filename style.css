@@ -266,14 +266,14 @@ body {
 }
 
 
-/* スマホ向け：メッセージ枠を下に固定 */
+/* スマホ向け：メッセージ枠を下に固定 
 @media (max-width: 768px) {
   #message {
     position: sticky;
     bottom: 0;
     margin-bottom: 0;
   }
-}
+}*/
 
 /* ===============================
    所持アイテム表示
