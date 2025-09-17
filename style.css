@@ -24,6 +24,80 @@ body {
   padding: 12px;
 }
 
+
+
+/* ===============================
+   スタート画面
+   =============================== */
+#start-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  text-align: center;
+}
+
+#game-title {
+  font-family: 'MedievalSharp', 'Yuji Mai', serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.8), 0 0 18px rgba(255,215,0,0.7);
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+/* ===== ニックネーム入力とEntryボタン ===== */
+#nickname-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* 入力欄とボタンの間隔 */
+  margin-top: 20px;
+}
+
+/* 入力欄 */
+#nickname-input {
+  font-size: 16px; /* スマホズーム防止 */
+  padding: 10px;
+  width: 200px;
+  max-width: 60%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* 中世風ボタン 共通 */
+.btn-medieval {
+  /* 日本語は Yuji Mai、英字は MedievalSharp を優先 */
+  font-family: 'MedievalSharp', 'Yuji Mai', 'Noto Serif JP', serif;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(255,255,255,0.8);
+}
+.btn-medieval:hover {
+  background: rgba(255,215,0,0.3);
+  color: #ffd700;
+  border-color: #ffd700;
+  transform: scale(1.05);
+}
+
+/* Entryボタン 
+#start-btn { }*/
+
 /* ===============================
    説明画面
    =============================== */
@@ -56,14 +130,14 @@ body {
   width: 100%;        /* 横いっぱい */
   height: 100%;       /* 縦いっぱい */
   object-fit: cover;  /* アスペクト比維持で全体表示 */
-  object-position: center; /* 中央に配置 */
+  object-position: center;
   z-index: 0; /* テキストより下 */
 }
 
 /* ストーリーテキスト */
 #intro-text {
   position: absolute;
-  top: 50%;                 /* 中央寄せ */
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
@@ -74,37 +148,28 @@ body {
   line-height: 1.8;
   z-index: 1;
 
-  /* 文字の見やすさアップ */
+  /* 文字を見やすくする影 */
   text-shadow:
     -2px -2px 4px rgba(0, 0, 0, 0.9),
      2px -2px 4px rgba(0, 0, 0, 0.9),
     -2px  2px 4px rgba(0, 0, 0, 0.9),
      2px  2px 4px rgba(0, 0, 0, 0.9);
-  /*background: rgba(0, 0, 0, 0.4); /* 背景半透明で文字を際立たせる */
+
   padding: 10px 20px;
   border-radius: 8px;
   pointer-events: none; /* ボタン操作を邪魔しない */
 }
 
-/* 進むボタン */
+/* 進むボタンは位置だけ指定（見た目は .btn-medieval に任せる） */
 #intro-next-btn {
   position: absolute;
   bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  background-color: #ffffffcc;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   z-index: 2;
 }
 
-#intro-next-btn:hover {
-  background-color: #fff;
-}
+
 
 
 
@@ -280,12 +345,7 @@ body {
 #quiz-area {
   margin-top: 10px;
 }
-/*
-#quiz-answer {
-  width: 80%;
-  padding: 6px;
-  margin-bottom: 10px;
-}*/
+
 /* クイズ入力ボックス */
 #quiz-answer {
   font-size: 16px; /* ★重要：16px以上にする */
@@ -385,51 +445,6 @@ body {
 }
 
 
-/* ===============================
-   スタート画面
-   =============================== */
-#start-screen {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.6);
-  z-index: 1000;
-  text-align: center;
-}
-
-#game-title {
-  font-family: 'MedievalSharp', 'Yuji Mai', serif;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  color: #fff;
-  text-shadow: 0 0 8px rgba(255,255,255,0.8), 0 0 18px rgba(255,215,0,0.7);
-  margin-bottom: 40px;
-  letter-spacing: 2px;
-  line-height: 1.2;
-}
-
-#start-btn {
-  font-family: 'MedievalSharp', serif;
-  font-size: 1.5rem;
-  padding: 12px 36px;
-  background: rgba(255,255,255,0.2);
-  border: 2px solid #fff;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 5px rgba(255,255,255,0.8);
-}
-#start-btn:hover {
-  background: rgba(255,215,0,0.3);
-  color: #ffd700;
-  border-color: #ffd700;
-  transform: scale(1.05);
-}
 
 /* モノクロからカラーに変化するアニメーション */
 @keyframes fadeToColor {
