@@ -5,6 +5,16 @@ let items = { A: false, B: false, C: false, O: false };
 let currentSpot = null;
 let oSpotUnlocked = false; // false: まだアイテムを納めていない
 
+// Oスポット演出用
+const popupImage = document.getElementById("popup-image");
+const popupMessage = document.getElementById("popup-message");
+
+// spotO_light のカラー化完了イベント
+popupImage.addEventListener("animationend", () => {
+  popupMessage.style.display = "block"; // アニメーション完了時に表示
+});
+
+
 // A〜J 訪問フラグ（Oは含めない）
 let visited = { A:false, B:false, C:false, D:false, E:false, F:false, G:false, H:false, I:false, J:false };
 
@@ -79,7 +89,6 @@ function openSpotPopup(spotId) {
 
       // ボタンを「アイテムを使う」だけに
       document.getElementById("quiz-submit").style.display = "none";
-      document.getElementById("quiz-cancel").style.display = "none";
 
       const offerBtn = document.createElement("button");
       offerBtn.id = "offer-items-btn";
@@ -99,12 +108,9 @@ function openSpotPopup(spotId) {
       const quizButtons = document.getElementById("quiz-buttons");
       quizButtons.innerHTML = `
         <button id="quiz-submit">送信</button>
-        <button id="quiz-cancel">キャンセル</button>
       `;
       document.getElementById("quiz-submit").onclick = quizSubmitHandler;
-      document.getElementById("quiz-cancel").onclick = () => {
-        document.getElementById("popup").style.display = "none";
-      };
+
     }
   } else if (quizData[spotId]) {
     // 通常スポット
@@ -116,12 +122,9 @@ function openSpotPopup(spotId) {
     const quizButtons = document.getElementById("quiz-buttons");
     quizButtons.innerHTML = `
       <button id="quiz-submit">送信</button>
-      <button id="quiz-cancel">キャンセル</button>
     `;
     document.getElementById("quiz-submit").onclick = quizSubmitHandler;
-    document.getElementById("quiz-cancel").onclick = () => {
-      document.getElementById("popup").style.display = "none";
-    };
+    
   }
 
   // 表示
@@ -160,14 +163,34 @@ function quizSubmitHandler() {
   if (ans === correct) {
     if (currentSpot === "O") {
       const popupImage = document.getElementById("popup-image");
+      const popupMessage = document.getElementById("popup-message");
+      const popupNextArea = document.getElementById("popup-next-area");
+      const closeButton = document.getElementById("popup-close");
 
+      // spotO_lightをモノクロで表示
       popupImage.src = "spotO_light.jpg";
+      popupMessage.style.display = "none";
+      closeButton.style.display = "none";
+
+      // アニメーション再起動
       popupImage.classList.remove("color-transition");
       void popupImage.offsetWidth;
       popupImage.classList.add("color-transition");
 
+      // アニメーション終了後にメッセージ表示
+      popupImage.addEventListener(
+        "animationend",
+        () => {
+          popupMessage.style.display = "block";
+        },
+        { once: true }
+      );
+
+      // クイズを消して進むボタンを表示
       document.getElementById("quiz-area").style.display = "none";
-      document.getElementById("popup-next-area").style.display = "block";
+      popupNextArea.style.display = "block";
+
+      // アイテムOを獲得
       getItem("O");
     } else {
       document.getElementById("popup-image").src = `item${currentSpot}.jpg`;

@@ -171,8 +171,6 @@ body {
 
 
 
-
-
 /* ===============================
    マップ表示
    =============================== */
@@ -201,8 +199,7 @@ body {
 @media (max-width: 768px) {
   #map-wrap {
     width: 100%;
-    aspect-ratio: 1 / 1; /* 正方形の枠 */
-    border-radius: 0;
+    overflow: hidden;
   }
 
   #map-img {
@@ -212,6 +209,7 @@ body {
     object-position: center;
   }
 }
+
 
 
 
@@ -342,20 +340,22 @@ body {
 
 @media (max-width: 768px) {
   #popup-content {
-    transform: scale(1.8) !important;
-    transform-origin: center center;
-    max-width: 100%;
+    transform: none !important;   /* 拡大を完全に解除 */
+    max-width: 90%;
     width: 90%;
+    max-height: 90vh;
     height: auto;
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
+    overflow-y: auto;             /* はみ出したらスクロール */
   }
 
   #popup {
-    align-items: center; /* stretchではなくcenterに */
+    align-items: center;
     justify-content: center;
   }
 }
+
 
 
 /* 画像エリア */
@@ -409,6 +409,18 @@ body {
   font-size: 14px;
   cursor: pointer;
 }
+
+
+/* 中世風フォントの適用 */
+.fantasy-font {
+  font-family: 'MedievalSharp', 'Yuji Mai', serif;
+  font-size: 1.6rem;
+  color: #fff;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.05em;
+}
+
 
 /* ===============================
    Oスポット クリア後のリワードオーバーレイ
@@ -474,12 +486,30 @@ body {
 
 
 /* モノクロからカラーに変化するアニメーション */
+#popup-image.color-transition {
+  filter: grayscale(100%);
+  animation: fadeToColor 3s ease forwards;
+}
+
 @keyframes fadeToColor {
   0% { filter: grayscale(100%); }
   100% { filter: grayscale(0%); }
 }
 
-#popup-image.color-transition {
-  animation: fadeToColor 2s ease forwards;
+
+/* ===============================
+   スマホ専用：巻物の文字サイズを大きく
+   =============================== */
+@media (max-width: 768px) {
+  /* ファンタジー風フォントの文章 */
+  #message-body .msg-fantasy {
+    font-size: 1.2rem; /* 例：少し大きめに */
+  }
+
+  /* 説明用の普通の文章（灰色） */
+  #message-body .msg-normal {
+    font-size: 1.1rem; /* 少しだけ拡大 */
+  }
 }
+
 
