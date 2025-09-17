@@ -330,10 +330,12 @@ body {
 /* ===============================
    ポップアップ
    =============================== */
+/* ポップアップ全体 */
 #popup {
   position: fixed;
   top: 0; left: 0;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.7);
   display: none;
   align-items: center;
@@ -341,6 +343,7 @@ body {
   z-index: 9999;
 }
 
+/* ポップアップコンテンツ（PC） */
 #popup-content {
   background: #fff;
   border-radius: 12px;
@@ -348,8 +351,27 @@ body {
   max-width: 90%;
   width: 400px;
   text-align: center;
-  position: relative; /* reward-overlayを重ねるため */
+  position: relative;
 }
+
+@media (max-width: 768px) {
+  #popup-content {
+    transform: scale(1.8); /* 1.8倍に拡大 */
+    transform-origin: center center; /* 中央を基準に拡大 */
+    max-width: 100%;
+    width: 90%;
+    height: auto;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* 画面いっぱいに表示 */
+  #popup {
+    align-items: stretch;
+    justify-content: center;
+  }
+}
+
 
 /* 画像エリア */
 #popup-image-container {
