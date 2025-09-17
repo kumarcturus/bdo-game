@@ -199,26 +199,20 @@ body {
 
 /* スマホ用設定 */
 @media (max-width: 768px) {
-
-  /* 横スクロール禁止 */
-  body {
-    overflow-x: hidden;
-  }
-
   #map-wrap {
     width: 100%;
-    aspect-ratio: 1 / 1; /* マップ領域は正方形のまま */
-    overflow: hidden; /* 枠外にはみ出した部分を隠す */
+    aspect-ratio: 1 / 1; /* 正方形の枠 */
     border-radius: 0;
   }
 
   #map-img {
-    transform: scale(1.8); /* 画像だけを1.8倍に拡大 */
-    transform-origin: center top; /* 拡大の基準を中央上部に */
-    width: 100%; /* 拡大前の基準サイズ */
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 }
+
 
 
 /* スポット */
@@ -348,7 +342,7 @@ body {
 
 @media (max-width: 768px) {
   #popup-content {
-    transform: scale(1.8) !important; /* 強制適用 */
+    transform: scale(1.8) !important;
     transform-origin: center center;
     max-width: 100%;
     width: 90%;
