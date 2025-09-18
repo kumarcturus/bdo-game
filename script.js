@@ -66,6 +66,10 @@ function openSpotPopup(spotId) {
     visited[spotId] = true;
   }
 
+  // クイズ入力欄を初期化（前回の入力を消す）
+  document.getElementById("quiz-answer").value = "";
+
+
   // スポット画像
   document.getElementById("popup-image").src = `spot${spotId}.jpg`;
 
