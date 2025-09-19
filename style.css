@@ -217,8 +217,8 @@ body {
 .spot {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 20px; /* 円形のサイズ指定（調整可） */
-  height: 20px;
+  width: 18px; /* 円形のサイズ指定（調整可） */
+  height: 18px;
   border-radius: 50%; /* 円形化 */
   border: 2px solid #000;
   background: rgba(255,255,255,0.82);
@@ -228,6 +228,11 @@ body {
 
   /* アルファベット透明化 */
   color: transparent;
+}
+
+/* 訪問済みスポット：枠線を水色に */
+.spot.visited {
+  border-color: #00BFFF; /* 枠線を明るい水色に変更 */
 }
 
 .spot.disabled {
@@ -383,6 +388,11 @@ body {
   padding: 2px 6px;
   border-radius: 4px;
   pointer-events: none; /* クリック操作を邪魔しない */
+  display: block;
+}
+/* rewardのitemO.jpgが表示されているときは非表示 */
+#popup-image[src="itemO.jpg"] + #image-credit {
+  display: none;
 }
 
 

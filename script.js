@@ -64,6 +64,12 @@ function openSpotPopup(spotId) {
   // O以外は訪問フラグON
   if (spotId !== "O" && visited.hasOwnProperty(spotId)) {
     visited[spotId] = true;
+    
+    // ★ 訪問したスポットにvisitedクラスを追加
+    const spotElement = document.getElementById(`spot${spotId}`);
+    if (spotElement) {
+      spotElement.classList.add("visited");
+    }
   }
 
   // クイズ入力欄を初期化（前回の入力を消す）
