@@ -211,8 +211,6 @@ body {
 }
 
 
-
-
 /* スポット */
 .spot {
   position: absolute;
@@ -232,7 +230,7 @@ body {
 
 /* 訪問済みスポット：枠線を水色に */
 .spot.visited {
-  border-color: #00BFFF; /* 枠線を明るい水色に変更 */
+  border-color: #A2D7DD; /* 天の原色に変更 */
 }
 
 .spot.disabled {
