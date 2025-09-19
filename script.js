@@ -16,7 +16,7 @@ popupImage.addEventListener("animationend", () => {
 
 
 // A〜J 訪問フラグ（Oは含めない）
-let visited = { A:false, B:false, C:false, D:false, E:false, F:false, G:false, H:false, I:false, J:false };
+let visited = { A:false, B:false, C:false, D:false, E:false, F:false, G:false, H:false, I:false, J:false, K:false };
 
 // プレイヤーネーム
 let playerName = "";
@@ -265,7 +265,7 @@ document.getElementById("popup-close").onclick = () => {
 // ----------------------------
 // スポット登録
 // ----------------------------
-["A","B","C","D","E","F","G","H","I","J"].forEach(id => {
+["A","B","C","D","E","F","G","H","I","J","K"].forEach(id => {
   const el = document.getElementById(`spot${id}`);
   if (el) el.onclick = () => openSpotPopup(id);
 });
